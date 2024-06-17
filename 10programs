@@ -1,0 +1,208 @@
+1.Write a program that generates a stream of random numbers and writes them to a file.
+
+import random
+file_path="Random_numbers.txt"
+num=int(input())
+with open(file_path,"w")as file:
+    for i in range(0,num):
+        file.write(str(random.randint(1,100))+"\n")
+print(f"{num} random numbers generated and save in {file_path}")
+
+Input:
+10
+Sample output:
+10 random numbers generated and save in Random_number.txt
+
+
+2.Write a program to read the random numbers from the file created above and calculate their average.
+
+with open('Random_numbers.txt', 'r') as file:
+    n=[int(line.strip())for line in file]
+    print(“Random Numbers:\n”,n)
+    average = sum(n) / len(n)
+print(f'The average of the random numbers is: {average}')
+
+ouput :
+Random Numbers:
+[1, 19, 62, 22, 68, 46, 52, 91, 91, 84]
+The average of the random numbers is: 53.6
+
+
+3.Write a program that reads from a file and handles the case where the file does not exist.
+
+f=input()
+try:
+    with open(f,"r")as file:
+        content=file.read()
+        print(content)
+except FileNotFoundError:
+    print("File not Found")    
+
+Input:
+Eamplefile
+ouput :
+File not Found
+
+
+4.Create a user-defined exception NegativeNumberError that is raised when a negative number is encountered in a list.
+
+class NegativeNumberError(Exception):
+    def __init__(self,n):
+        self.n=n
+    def __str__(self):
+        return f"the given list has negative number {self.n}"
+n=input().split()
+n=[int(i) for i in n]
+def neg_num(n):
+    for i in n:
+        if i<0:
+            raise NegativeNumberError(i)
+try:
+    neg_num(n)
+except NegativeNumberError as e:
+    print("Error :\n ",e)
+
+Input:
+1 2 3 4 5 -6
+ouput :
+Error :
+  the given list has negative number -6
+
+  
+5.Create a NumPy array of 10 random numbers and print them.
+
+import random as r
+import numpy as np
+a=[]
+for i in range(0,10):
+    a.append(r.randint(0,100))
+a=np.array(a)
+print("The 10 random number :\n",a)
+
+ouput :
+The 10 random number :
+ [22 33 95 45 30 54 96 32 36 41]
+
+
+6.Write a program to add and remove items from a NumPy array.
+
+import numpy as np
+import random as r
+n=input().split()
+n=np.array(n)
+print("original array :",n)
+while True:
+    print("Enter\n1 to add\n2 to remove\n3 to Exit\n")
+    x=int(input())
+    if x==1:
+        print(("Enter a number to add :\n"))
+        z=int(input())
+        a=np.append(n,z)
+        print(a)
+    elif x==2:
+        print("Enter a number to remove :\n")
+        z=int(input())
+        d=np.delete(n,0)
+        print(d)
+    else:
+        print("Updated")
+        break
+
+Input:
+1 2 3 4 5
+1
+6
+3 
+ouput :
+original array : ['1' '2' '3' '4' '5']
+Enter
+1 to add
+2 to remove
+3 to Exit
+Enter a number to add :
+['1' '2' '3' '4' '5' '6']
+Enter
+1 to add
+2 to remove
+3 to Exit
+Updated
+
+
+7.Sort the NumPy array which you created.
+
+import numpy as np
+import random
+a=[]
+for i in range(0,10):
+    a.append(random.randint(0,100))
+a=np.array(a)
+print("Original array :",a)
+print("sorted array  :  ",np.sort(a))
+
+ouput :
+Original array : [98 31 72  4 64 37 36 85 14 95]
+Sorted array  :   [ 4 14 31 36 37 64 72 85 95 98]
+
+
+8.	Reshape a NumPy array into a 2x5 matrix.
+
+import numpy as np
+import random
+a=[]
+for i in range(0,10):
+    a.append(random.randint(0,100))
+a=np.array(a)
+print("Original array :",a)
+print("Reshaped array  :\n",a.reshape(2,5))
+
+ouput :
+Original array : [54 89 10 83 80 47 41 73 16 18]
+Reshaped array  :
+ [[54 89 10 83 80]
+ [47 41 73 16 18]]
+
+
+9.Demonstrate indexing and slicing on the reshaped matrix.
+
+import numpy as np
+import random
+a=[]
+for i in range(0,12):
+    a.append(random.randint(0,100))
+a=np.array(a)
+print("the original array :",a)
+b=a.reshape(3,4)
+print("after reshaping array  :\n",b)
+print("indexing Value :",b[1,2])
+print("Slicing of a range of Value :\n",b[:,1:3])
+
+Sample input & ouput :
+the original array : [ 1 29 80 56 13 73 59 90 70  9 12 74]
+after reshaping array  :
+ [[ 1 29 80 56]
+ [13 73 59 90]
+ [70  9 12 74]]
+indexing Value : 59
+Slicing of a range of Value :
+ [[29 80]
+ [73 59]
+ [ 9 12]]
+
+
+10.Write a program to append new data to an existing file and then read the updated file.
+
+f=open("random_number.txt","a")
+n=input("Enter the data to append (separated by comma(,) :\n")
+f.write(n)
+f.close()
+f=open("random_number.txt","r")
+print("the updated random numbers in the file :")
+print(f.read())
+f.close()
+
+Sample input & ouput :
+Enter the data to append (separated by comma(,) : ,77,88,99
+the updated random numbers in the file :
+38,22,42,30,13,48,25,33,37,34,14,26,18,39,20,50,50,33,13,33,77,88,99
+
+
